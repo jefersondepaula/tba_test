@@ -1,0 +1,338 @@
+@import 'reset';
+@import 'responsive';
+@import 'mixins';
+@import 'animate';
+
+$primary_color: #23254f;
+$secondary_color: #d9082a;
+$container_width: 1150px;
+$white: #fff;
+$pb_default: 30px;
+
+html{
+    box-sizing: border-box;
+    font-family: 'Lato', sans-serif;
+    color:$white;
+    overflow-x: hidden;
+}
+p{line-height: 1.5;}
+
+.container{
+    max-width: $container_width;
+    margin: auto;
+}
+a{
+    span{
+        padding-left:15px ;
+    }
+} 
+
+.close-mobile{display: none;}
+
+header{
+    @include xs{
+        background-color: $primary_color;   
+    }
+    nav.nav-menu{
+        position: fixed;
+        width: 100%;
+        z-index: 2;
+        .menu-mobile{
+            display: none;            
+            position: absolute;
+            line-height: 150px;
+            right: 0;
+            margin-right: 20px;            
+        }
+        @include md{
+            .menu-mobile{display: block;}
+            .close-mobile span{
+                display: inline-block;
+                position: absolute;
+                font-size: 35px;
+                line-height: 125px;
+                margin-right: 20px;
+                right: 0;
+            }
+        }
+        background-color: $white;        
+        .content-menu{
+            @include flex(row,space-between, flex-end);
+            @include big {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+            height:100px;        
+            color: $primary_color;
+            padding-bottom: $pb_default;
+
+        }
+        .menu { 
+            transition: all ease 1s;
+            @include md{
+                display: block;
+                position: fixed;
+                width: 0;
+                height: 100%;
+                right: 0;
+                bottom: 0;
+                background-color: rgba(255, 255, 255, 0.849);
+            } 
+            ul{
+                @include md{
+                   @include flex(column, space-evenly, center);
+                   height: 100%;
+                   font-size: 1.5em;
+                   display: none;
+                   opacity: 0;
+                   transition: all ease .5s;
+                }      
+            }               
+            li{
+                display: inline-block;
+                text-transform: capitalize;   
+                margin-left: 10px;
+                font-weight: bold;  
+                @include md{
+                    &:after{
+                        margin-top: 20px;
+                        display: block;
+                        content: '';
+                        width: auto;
+                        height: 3px;
+                        background-color: $primary_color;
+                    }  
+                }                   
+                a{
+                    font-size: .8em;
+                    color: #555;
+                    transition: all ease .8s;
+                    &:hover{
+                        color: $secondary_color;
+                    }
+                }
+            }            
+        }     
+    }   
+    .banner-header{
+        background-image: url(../img/header-bg.png);
+        background-size: cover;
+        background-position: bottom;
+        @include sm{
+            .overlay{
+                content: '';
+                background-color: #23254fa8;
+                height: 100%;
+                width: 100%;
+            }
+        }
+        .banner-text{
+            height: 100vh;
+            width: 30%;
+            padding: 70px;  
+            @include flex(column, center, flex-start);
+            @include sm{
+                width: auto;
+                padding: 0 50px;
+                z-index: 2;
+            }
+            h1,p{
+                margin-bottom: $pb_default;
+            }
+            p{
+                font-size: .8em;
+                color: #ccc;
+            }
+        }
+    }
+    h1{@include title_h1();} 
+}
+
+.first-section{
+    padding: 50px 0px;
+    @include flex(row);
+    @include sm{
+        @include flex(column);
+    }
+    >div:last-child{
+        border-right: 0;
+    }
+    >div{      
+        @include flex(column, flex-start, center);
+        @include sm{
+            border-right: 0;
+            margin-top: $pb_default;
+            margin-bottom: $pb_default;
+        }
+        padding: 0 50px;
+        font-size: .8em;
+        text-align: center;
+        flex:1;
+        border-right: 2px solid #d2d7db;
+        color: #ccc;
+        .title{
+            margin-top: 10px;
+        }
+        .text{
+            margin: $pb_default 0px;
+            color: #666
+        }
+        h2{
+            text-transform: capitalize;
+            font-weight: bold;
+            color:$primary_color;
+        }
+        .btn{
+            color: $primary_color;
+        }
+    } 
+}
+.second-section{
+    @include flex(row);     
+    @include sm{
+        @include flex(column);
+    }
+    a{
+        color:$white
+    }   
+    >div{       
+        flex: 1;
+        min-height: 390px;
+        width: 100%;
+        @include flex(column, center, center);      
+    }
+    .events{        
+        @include flex(column, space-evenly, center);
+        background-color: $primary_color;
+        .title{
+            padding: 15px 0;
+        } 
+        .description{
+            padding: 0 50px;
+            font-size: .8em; 
+            @include sm{
+                padding: 15px 0;               
+            }  
+            @include md{
+                padding: 0 35px;
+            }             
+           .when{
+               @include flex(row, space-between, flex-start);
+               font-weight: bold;
+           }
+           .text{
+               color: #ccc;
+               line-height: 1.5;               
+           }
+        }
+    }
+    .follow{
+        background-color: $secondary_color;               
+        .text{
+            padding: 0px 50px;
+            margin-top: $pb_default;
+            line-height: 1.5;
+            font-style: italic;
+            color: #ccc;
+            font-size: .8em; 
+        }
+        .btn{
+            margin-top: $pb_default;
+        }
+    }
+    .gallery{        
+        @include flex(column, stretch, center);
+        a{
+            color: $primary_color;
+        }
+        >div{
+            flex:1;
+            width: 100%;
+            @include flex(row,center,stretch); 
+            .img-area{
+                background-size: cover;
+                background-position: center;
+                width: 100%;
+                height: auto;
+            }          
+            img{
+                width: auto;
+                max-height: 130px;
+                height: 100%;
+                object-fit: contain;
+            } 
+            .btn{
+                @include flex();
+                color: $primary_color;
+                background-color: #d2d7db;
+                width: 200%
+            }                     
+        }
+    }
+}
+.third-section{
+    @include flex(row,center,center);
+    flex-wrap: wrap;
+    >div{
+        @include flex();
+        flex: 1;
+        min-width: 200px;
+        margin: 20px 0;
+        img{
+            max-width: 100%;
+            height: auto;
+        }
+    }
+}
+footer{
+    background-color: #d2d7db;
+    .container{
+        @include flex(row, space-between,);
+        @include big {
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        @include sm{
+            @include flex(column, space-around);
+            padding-bottom:20px;
+        }
+        
+        height: 110px;
+        .link-list{
+            height: 100%;
+            @include flex(row,flex-start,center)
+        }
+        .social{
+            a{
+                padding: 10px;
+                border-radius: 50%;
+                border: 1px solid $primary_color;
+                transition: all ease-in-out .4s;
+                &:hover{
+                    border: 1px solid $secondary_color;
+                }
+            }
+        }
+        ul{
+            li{
+                display: inline-block;            
+                a{                    
+                    color: #555;
+                    padding: 0 8px;
+                    font-size: .8em;
+                    border-right: 1px solid #555;
+                    transition: all ease .8s;
+                    @include sm{
+                        font-size: .6em;
+                    }
+                    &:hover{
+                        color: $secondary_color;
+                    }
+                }
+            }
+        }
+    }  
+}
+
+
